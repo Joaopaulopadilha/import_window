@@ -1,0 +1,50 @@
+// Exemplo básico de criação de janela com JP
+
+import window
+
+print("=== JP Window Example ===")
+print("Criando janela...")
+
+// Cria janela 
+win = createWindow("Minha Janela JP", 800, 600)
+
+if win == 0 {
+    print("❌ Falha ao criar janela!")
+    return
+}
+
+print("✅ Janela criada com sucesso!")
+
+// Mostra janela
+showWindow(win)
+print("🪟 Janela exibida. Use ESC para fechar.")
+
+// Loop principal
+frame = 0
+while pollEvents(win) {
+    frame = frame + 1
+    
+    // Atualiza título com contador
+    if frame % 60 == 0 {  // A cada 60 frames
+        title = "Janela JP - Frame: " + frame
+        setWindowTitle(win, title)
+    }
+    
+    // Verifica teclas
+    if isKeyPressed(VK_ESCAPE) {
+        print("🔑 ESC pressionado - fechando...")
+        break
+    }
+    
+    if isKeyPressed(VK_SPACE) {
+        print("🔑 SPACE pressionado!")
+    }
+    
+    // Pequena pausa para não consumir 100% CPU
+    sleep(16)  // ~60 FPS
+}
+
+// Limpa recursos
+destroyWindow(win)
+print("🧹 Janela destruída")
+print("✅ Programa concluído!")
