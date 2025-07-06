@@ -1,0 +1,144 @@
+{
+  "name": "window",
+  "version": "1.0.0",
+  "description": "Native window creation using Win32 API for JP language",
+  "author": "Joaopaulopadilha",
+  "license": "MIT",
+  
+  "native": true,
+  
+  "includes": [
+    "\"window.hpp\""
+  ],
+  
+  "libraries": {
+    "windows": ["-lgdi32", "-luser32", "-lkernel32"],
+    "linux": ["-lX11"],
+    "macos": ["-framework Cocoa"]
+  },
+  
+  "source_files": [
+    "src/window.cpp"
+  ],
+  
+  "functions": {
+    "createWindow": {
+      "description": "Creates a native window",
+      "cpp_name": "jp_create_window",
+      "params": [
+        {"name": "title", "type": "string", "description": "Window title"},
+        {"name": "width", "type": "int", "description": "Window width in pixels"},
+        {"name": "height", "type": "int", "description": "Window height in pixels"}
+      ],
+      "return": {
+        "type": "void*",
+        "description": "Window handle"
+      },
+      "example": "win = createWindow(\"My App\", 800, 600)"
+    },
+    
+    "showWindow": {
+      "description": "Shows the window on screen",
+      "cpp_name": "jp_show_window",
+      "params": [
+        {"name": "window", "type": "void*", "description": "Window handle"}
+      ],
+      "return": {
+        "type": "void",
+        "description": "No return value"
+      },
+      "example": "showWindow(win)"
+    },
+    
+    "pollEvents": {
+      "description": "Processes window events, returns false if window should close",
+      "cpp_name": "jp_poll_events",
+      "params": [
+        {"name": "window", "type": "void*", "description": "Window handle"}
+      ],
+      "return": {
+        "type": "bool",
+        "description": "false if window should close, true to continue"
+      },
+      "example": "while pollEvents(win) { // main loop }"
+    },
+    
+    "destroyWindow": {
+      "description": "Destroys the window and frees resources",
+      "cpp_name": "jp_destroy_window",
+      "params": [
+        {"name": "window", "type": "void*", "description": "Window handle"}
+      ],
+      "return": {
+        "type": "void",
+        "description": "No return value"
+      },
+      "example": "destroyWindow(win)"
+    },
+    
+    "setWindowTitle": {
+      "description": "Changes the window title",
+      "cpp_name": "jp_set_window_title",
+      "params": [
+        {"name": "window", "type": "void*", "description": "Window handle"},
+        {"name": "title", "type": "string", "description": "New window title"}
+      ],
+      "return": {
+        "type": "void",
+        "description": "No return value"
+      },
+      "example": "setWindowTitle(win, \"New Title\")"
+    },
+    
+    "isKeyPressed": {
+      "description": "Checks if a key is currently pressed",
+      "cpp_name": "jp_is_key_pressed",
+      "params": [
+        {"name": "keyCode", "type": "int", "description": "Virtual key code (VK_*)"}
+      ],
+      "return": {
+        "type": "bool",
+        "description": "true if key is pressed"
+      },
+      "example": "if isKeyPressed(VK_SPACE) { jump() }"
+    }
+  },
+  
+  "constants": {
+    "VK_SPACE": {
+      "value": "32",
+      "type": "int",
+      "description": "Space key virtual key code"
+    },
+    "VK_ENTER": {
+      "value": "13", 
+      "type": "int",
+      "description": "Enter key virtual key code"
+    },
+    "VK_ESCAPE": {
+      "value": "27",
+      "type": "int", 
+      "description": "Escape key virtual key code"
+    },
+    "VK_LEFT": {
+      "value": "37",
+      "type": "int",
+      "description": "Left arrow key"
+    },
+    "VK_UP": {
+      "value": "38", 
+      "type": "int",
+      "description": "Up arrow key"
+    },
+    "VK_RIGHT": {
+      "value": "39",
+      "type": "int",
+      "description": "Right arrow key"
+    },
+    "VK_DOWN": {
+      "value": "40",
+      "type": "int",
+      "description": "Down arrow key"
+    }
+  }
+}
